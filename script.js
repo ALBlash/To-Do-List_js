@@ -19,11 +19,6 @@ add.addEventListener('input', () => {
 
 
 
-
-
-
-
-
 //////// Plus-Btn////////
 plusBtn.addEventListener('click', handlePlusBtnClick);
 
