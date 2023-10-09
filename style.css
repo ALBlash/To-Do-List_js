@@ -276,7 +276,7 @@
         background: #bdbdcb;
         height: 40px;
         margin: 0 auto;
-        width: 50vw;
+        width: 75vw;
         margin-bottom: 15px;
         padding: 5px 10px;
         justify-content: space-between;
@@ -311,14 +311,14 @@
     }
 
     .trash {
-        width: 22px;
+        /* width: 20px; */
         cursor: pointer;
-        font-size: 25px;
+        font-size: 22px;
     }
 
     #todo-p {
-        width: 33vw;
-        /* max-width: 390px; */
+        width: 50vw;
+        max-width: 390px;
         height: 30px;
         padding: 5px 8px;
         border: none;
@@ -326,7 +326,6 @@
         color: darkgreen;
         background-color: #edecec;
         font-size: 14px;
-        font-family: cursive;
     }
 
 
