@@ -91,8 +91,18 @@
         padding: 10px 20px;
         justify-content: space-between;
         border-radius: 8px;
-        transition: transform 0.3s ease-in-out;
+        transform: translateY(20px);
+        /* Move the element down initially */
+        transition: opacity 0.5s, transform 0.7s;
+        /* Apply transition to opacity and transform */
     }
+
+
+    .to-do.active {
+        transform: translateY(0);
+        /* Move the element back to its original position */
+    }
+
 
     .star {
         width: 35px;
@@ -111,10 +121,10 @@
 
     .active-star {}
 
-    .move-to-top {
+    /* .move-to-top {
         transform: translateY(5px);
 
-    }
+    } */
 
     .hidden {
         display: none;
@@ -171,7 +181,8 @@
     }
 
     #warning {
-        color: red;
+        color: #ff5e5e;
+        ;
         display: none;
         margin: 0;
     }
@@ -360,7 +371,8 @@
     }
 
     #warning {
-        color: red;
+        color: #ff5e5e;
+        ;
         display: none;
         margin: 0;
     }

@@ -20,8 +20,8 @@ add.addEventListener('input', () => {
 
 
 //////// Plus-Btn////////
+let max = 0;
 plusBtn.addEventListener('click', handlePlusBtnClick);
-
 
 function handlePlusBtnClick() {
 
@@ -47,35 +47,21 @@ viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fo
 d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
 </svg>
 `;
-        container.append(newDiv)
+        container.append(newDiv);
+        setTimeout(() => {
+            newDiv.classList.add('active');
+        }, 50);
         add.value = '';
 
     } else {
         p.style.display = 'block'
     }
-    disabeldPlusBtn();
+
     trashIcon();
     addFullStar();
 }
 
 
-
-
-const todoArr = [];
-function disabeldPlusBtn() {
-
-    todoArr.push(1);
-
-    if (todoArr.length >= 10) {
-        plusBtn.removeEventListener('click', handlePlusBtnClick);
-        p.innerHTML = 'the list can contain Max 10';
-        p.style.color = '#b9edb9';
-        p.style.display = 'block';
-        plusBtn.style.opacity = 0;
-    }
-    console.log(todoArr);
-
-}
 
 
 
@@ -85,16 +71,15 @@ function trashIcon() {
     const trashIcons = document.querySelectorAll('.trash');
     trashIcons.forEach((icon) => {
         icon.addEventListener('click', (e) => {
-            const todoItem = e.target.parentElement; // Assuming the parent of the trash icon is the todo item
+            const todoItem = e.target.parentElement; // returning the svg
             const parentAdd = todoItem.closest('.to-do');
             parentAdd.remove();
-            todoArr.pop();
+
 
         });
     });
-}
+};
 
-// trashIcon();
 
 
 
@@ -111,8 +96,6 @@ function addFullStar() {
         const path = parentStar.querySelector('#path');
 
         if (clickedStar.classList.contains('star')) {
-            parentStar.classList.add('active-star');
-            parentStar.classList.add('move-to-top');
             path.classList.add('full');
             clickedStar.classList.add('hidden');
             fullStr.classList.remove('hidden');
@@ -120,14 +103,9 @@ function addFullStar() {
         } else if (path.classList.contains('full')) {
             fullStr.classList.add('hidden');
             path.classList.remove('full');
-            parentStar.classList.remove('active-star');
             const emptyStar = parentStar.querySelector('.star');
             emptyStar.classList.remove('hidden');
         }
     });
 
-    container.addEventListener('transitionend', (e) => {
-        const clickedStar = e.target;
-        clickedStar.classList.remove('move-to-top');
-    });
 }
