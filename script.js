@@ -97,6 +97,8 @@ function saveToLoacal(taskId) {
     localStorage.setItem('tasks', JSON.stringify(locArr));
 }
 
+// when a star is clicked "updateLocal" function updates the local storage
+//the status of the completed section
 function updateLocal(dataId, completed) {
     const data = JSON.parse(localStorage.getItem('tasks'));
     const updatedData = data.map(task => {
@@ -112,7 +114,7 @@ function updateLocal(dataId, completed) {
 
 
 
-
+// takes tasks from the local storage and append's them to the container
 function appendToContainer() {
 
     const container = document.querySelector(".container");
@@ -141,7 +143,7 @@ function appendToContainer() {
             </svg>
             `;
 
-
+        // adding to each star the eventListener
         const fullStarIcons = newTas.querySelectorAll('.full-star');
         fullStarIcons.forEach((fullStar) => {
             fullStar.addEventListener('click', () => {
@@ -149,16 +151,13 @@ function appendToContainer() {
             });
         });
 
+        // append/prepend depends by the completed section of each task
         if (data[i].completed === true) {
             container.prepend(newTas)
         } else {
             container.append(newTas)
         }
 
-        const reloadTimeout = setTimeout(function () {
-            window.location.reload();
-        }, 1000);
-        clearInterval(reloadTimeout);
 
     }
 }
@@ -185,6 +184,7 @@ function toggleFullStar(fullStar) {
 
 
 ///////////// TRASH //////////////////
+// adding the delete option
 function trashIcon() {
     const trashIcons = document.querySelectorAll('.trash');
     trashIcons.forEach((icon) => {
@@ -192,30 +192,21 @@ function trashIcon() {
             const todoItem = e.target.parentElement; // returning the svg
             const parentAdd = todoItem.closest('.to-do');
             parentAdd.remove();
-            // taskIdCounter--;
 
         });
     });
 
-    // const trashIcons = document.querySelectorAll('.trash');
     trashIcons.forEach((trash, i) => {
         trash.addEventListener('click', () => {
             const parentToDos = trash.closest('.to-do');
             const taskId = parseInt(parentToDos.querySelector('.star').getAttribute('data-id'));
             removeFromLocal(taskId);
-            tasksToRemove(taskId);
         });
     });
 
 };
 
 
-// function activeRemoveLocalOption() {
-//     const deleteBtn = document.querySelectorAll('.trash');
-//     deleteBtn.forEach((db, i) => {
-//         db.addEventListener('click', () => { removeFromLocal(i) });
-//     })
-// }
 
 function removeFromLocal(id) {
     // Find the index of the task with the given ID
@@ -231,17 +222,11 @@ function removeFromLocal(id) {
 }
 
 
-function tasksToRemove(id) {
-    const updateTask = locArr.filter(task => task.id !== id);
-    // locArr = updateTask;
-    localStorage.setItem('tasks', JSON.stringify(updateTask));
-    // console.log(updateTask);
-}
 
 
 ////////////////// STAR /////////////////////
 
-
+// changing the stars state by the click
 function addFullStar() {
 
     container.addEventListener('click', (e) => {
@@ -250,17 +235,17 @@ function addFullStar() {
         const fullStr = parentStar.querySelector('.full-star');
         const path = parentStar.querySelector('#path');
         const str = parentStar.querySelector('.star');
-        const dataId = str.getAttribute('data-id')
+        const dataId = str.getAttribute('data-id');
         let completed = false;
 
         if (clickedStar.classList.contains('star')) {
-            clickedStar.setAttribute('completed', 'true')
+            clickedStar.setAttribute('completed', 'true');
             path.classList.add('full');
             clickedStar.classList.add('hidden');
             fullStr.classList.remove('hidden');
             container.prepend(parentStar);
         } else if (path.classList.contains('full')) {
-            clickedStar.setAttribute('completed', 'false')
+            clickedStar.setAttribute('completed', 'false');
             fullStr.classList.add('hidden');
             path.classList.remove('full');
             const emptyStar = parentStar.querySelector('.star');
